@@ -9,7 +9,11 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
-driver = webdriver.Chrome()
+# 淘宝镜像http://npm.taobao.org/mirrors/chromedriver/ 选择与chrome相同或老一点的版本
+# chrome地址栏输入chrome://version/可查看版本
+
+# 把chromedriver.exe放在与python脚本同目录会自动查找
+driver = webdriver.Chrome('D:/webdriver/chromedriver.exe')
 
 # 将浏览器最大化显示
 driver.maximize_window()
@@ -54,5 +58,8 @@ driver.implicitly_wait(30)
 # from selenium.webdriver.common.keys import Keys通过 send_keys()调用按键
 # send_keys(Keys.TAB) # tab
 # send_keys(Keys.ENTER) # 回车
+
+picture_url = driver.get_screenshot_as_file('D:/data/test.png')
+print('截图成功 -> %s' % picture_url)
 
 driver.close()
