@@ -59,7 +59,7 @@ driver.implicitly_wait(30)
 # send_keys(Keys.TAB) # tab
 # send_keys(Keys.ENTER) # 回车
 
-picture_url = driver.get_screenshot_as_file('D:/data/test.png')
-print('截图成功 -> %s' % picture_url)
+if driver.get_screenshot_as_file('D:/data/test.png'):
+    print('截图成功')
 
 driver.close()
