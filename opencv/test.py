@@ -26,7 +26,7 @@ def check(frame1):
 cap = cv2.VideoCapture(0)
 while True:
     ret, frame2 = cap.read()
-    # cv2.imshow("原图", frame)
+    cv2.imshow("原图", frame2)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
     check(frame2)
