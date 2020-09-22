@@ -13,7 +13,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 # chrome地址栏输入chrome://version/可查看版本
 
 # 把chromedriver.exe放在与python脚本同目录会自动查找
-driver = webdriver.Chrome('D:/webdriver/chromedriver.exe')
+driver = webdriver.Chrome('/Users/lilei/project/webdriver/chromedriver')
 
 # 将浏览器最大化显示
 driver.maximize_window()
@@ -59,7 +59,7 @@ driver.implicitly_wait(30)
 # send_keys(Keys.TAB) # tab
 # send_keys(Keys.ENTER) # 回车
 
-if driver.get_screenshot_as_file('D:/data/test.png'):
-    print('截图成功')
+# if driver.get_screenshot_as_file('D:/data/test.png'):
+#     print('截图成功')
 
 driver.close()
