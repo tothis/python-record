@@ -39,7 +39,7 @@ CREATE TABLE `菜品` (
 `脂肪` FLOAT UNSIGNED DEFAULT NULL COMMENT '脂肪',
 `适应症` VARCHAR ( 255 ) DEFAULT '' COMMENT '适应症',
 `图片` VARCHAR ( 255 ) DEFAULT '' COMMENT '图片',
-PRIMARY KEY ( `id` ) USING BTREE 
+PRIMARY KEY ( `id` ) USING BTREE
 )
 ''')
 
@@ -49,8 +49,9 @@ max_count = 712
 
 for i in range(1, max_count + 1):
     new_url = url + str(i)
-    print('url为 -> ' + new_url)
+    print('url' + new_url)
     response = requests.get(new_url).text
+    # 解析html文本 获取_Element对象
     html_result = html.etree.HTML(response)
     # 菜谱列表
     li_list = html_result.xpath("//*[@class='list-main']/div/div[2]/ul/li")
@@ -72,7 +73,7 @@ for i in range(1, max_count + 1):
             new_page_info = new_html_result.xpath("//*[@class='info-base']/div")[0]
             # print('结果', html.etree.tostring(new_page_info, encoding='utf8').decode())
         except IndexError:
-            break
+            continue
 
         # 字段缺失则设置为空
         try:
@@ -125,21 +126,23 @@ for i in range(1, max_count + 1):
             适应症,
             图片
         )
-        VALUE ( '{}', '{}', {}, {}, {}, {}, '{}', '{}', '{}', '{}' )
-        '''.format(
+        VALUE ( %s, %s, %s, %s, %s, %s, %s, %s )
+        '''
+        print('sql', sql)
+        cursor.execute(sql, (
             菜品名称,
             菜品类型,
-            卡路里 if is_number(卡路里) else 'null',
-            蛋白质 if is_number(蛋白质) else 'null',
-            碳水化合物含量 if is_number(碳水化合物含量) else 'null',
-            脂肪 if is_number(脂肪) else 'null',
+            卡路里 if is_number(卡路里) else None,
+            蛋白质 if is_number(蛋白质) else None,
+            碳水化合物含量 if is_number(碳水化合物含量) else None,
+            脂肪 if is_number(脂肪) else None,
             适应症,
-            图片
-        )
-        print('sql为 ', sql)
-        cursor.execute(sql)
+            图片))
         db.commit()
+        # 睡眠20秒 防止限制IP
         time.sleep(20)
 
+# 关闭游标
+cursor.close()
 # 关闭数据库连接
 db.close()
