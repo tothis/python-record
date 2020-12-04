@@ -30,7 +30,7 @@ CREATE TABLE `异常心率` (
 	`预后` LONGTEXT COMMENT '预后',
 	`治疗` LONGTEXT COMMENT '治疗',
 	`描述` LONGTEXT COMMENT '描述',
-PRIMARY KEY ( `id` ) USING BTREE
+PRIMARY KEY ( `id` )
 )
 ''')
 
@@ -68,6 +68,7 @@ for i in range(1, 20):
         try:
             article = click_response_html.xpath('//div[@class="topic__accordion"]')[0]
         except IndexError:
+            # 跳过错误页面
             continue
 
         # print('结果', html.tostring(article, encoding='utf8').decode())
