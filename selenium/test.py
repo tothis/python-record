@@ -1,7 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
-__author__ = '李磊'
-
+# coding: utf-8
 import time
 
 from selenium import webdriver

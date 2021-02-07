@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# coding: utf-8
 # 随机生成手机号码
 import random
 

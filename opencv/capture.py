@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# coding: utf-8
 import cv2
 
 capture = cv2.VideoCapture(0)  # 创建一个 VideoCapture 对象

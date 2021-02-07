@@ -1,7 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
-__author__ = '李磊'
-
+# coding: utf-8
 import re
 import time
 
@@ -20,7 +18,7 @@ def download_file(file_path, file_name):
     r = requests.get(file_path)
     # 保存图片至当前image目录下 也可使用绝对路径D:/image/ 此目录不会自动创建需手动创建
     path = file_name
-    with open(path, 'wb') as f:
+    with open(path, 'wb', encoding='utf8') as f:
         f.write(r.content)
 
 

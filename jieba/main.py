@@ -1,5 +1,6 @@
+#!/usr/bin/env python
+# coding: utf-8
 # 原文 https://www.bilibili.com/video/av46929001
-
 import jieba.posseg as psg
 
 import numpy as np
@@ -45,7 +46,7 @@ def create_word_cloud(lst):
 if __name__ == "__main__":
 
     # 打开存放项目名称的txt文件
-    with open('text.txt', 'r', encoding='utf-8') as f:
+    with open('text.txt', encoding='utf8') as f:
         content = (f.read())
         f.close()
 

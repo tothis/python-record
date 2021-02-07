@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# coding: utf-8
 import logging
 from logging import handlers
 
@@ -30,9 +32,9 @@ class Logger(object):
 
 
 if __name__ == '__main__':
-    log = Logger('test.log', level='debug')
-    log.logger.debug('--- debug ---')
-    log.logger.info('--- info ---')
-    log.logger.warning('--- warning ---')
-    log.logger.error('--- error ---')
-    log.logger.critical('--- critical ---')
+    log = Logger('run.log', level='debug').logger
+    log.debug('--- debug ---')
+    log.info('--- info ---')
+    log.warning('--- warning ---')
+    log.error('--- error ---')
+    log.critical('--- critical ---')
