@@ -1,9 +1,18 @@
 #!/usr/bin/env python
 # coding: utf-8
+import platform
 import sys
+from ctypes import CDLL
 
-from PyQt5.QtGui import QFont
+from PyQt5.QtGui import QFont, QIcon
 from PyQt5.QtWidgets import QMainWindow, QTextBrowser, QApplication, QMessageBox
+
+# 动态链接库生成参考 https://github.com/tothis/cpp-record/tree/main/lib
+if platform.system() == 'Windows':
+    dll = CDLL('lib/test')
+elif platform.system() == 'Linux':
+    dll = CDLL('lib/test.so')
+print('dll', dll.test_add(1, 2))
 
 
 class Main(QMainWindow):
@@ -11,6 +20,7 @@ class Main(QMainWindow):
         super(Main, self).__init__()
         # 窗口标题
         self.setWindowTitle('文件拖入')
+        self.setWindowIcon(QIcon('favicon.ico'))
         # 窗口大小
         self.resize(500, 400)
         # 开启拖曳操作文本
