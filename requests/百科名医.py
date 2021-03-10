@@ -19,20 +19,37 @@ def save_excel():
         'fg_color': '#f4b084',  # 颜色填充
         'text_wrap': True  # 自动换行
     })
-    sheet = excel.add_worksheet('Data')
     file = open(data_file_path, encoding='utf8')
     line = file.readline()
-    i = 0
+    sheet_dict = {}
     while line:
         excel_row = eval(line)
+        # 类型
+        first_col = excel_row[0]
+        data_index = first_col + 'index'
+        data_sheet = first_col + 'sheet'
+        # 每个sheet下标
+        if data_index in sheet_dict:
+            i = sheet_dict[data_index]
+        else:
+            sheet_dict[data_index] = i = 0
+        # 每个sheet实例
+        if data_sheet in sheet_dict:
+            sheet = sheet_dict[data_sheet]
+        else:
+            sheet_dict[data_sheet] = sheet = excel.add_worksheet(first_col)
+        # 删除类型
+        excel_row = excel_row[1:]
         for j in range(len(excel_row)):
             # 连续两行的A单元格合并为一格 B单元格同理
             if i % 2:
-                sheet.merge_range('A{}:A{}'.format(i, i + 1), excel_row[0], merge_format)
-                sheet.merge_range('B{}:B{}'.format(i, i + 1), excel_row[1], merge_format)
+                for char_i, char in enumerate(['A', 'B']):
+                    sheet.merge_range('{}{}:{}{}'.format(char, i, char, i + 1), excel_row[char_i], merge_format)
             sheet.write(i, j, excel_row[j])
-        i += 1
+        # 更新索引
+        sheet_dict[data_index] += 1
         line = file.readline()
+    print('sheet-dict', sheet_dict)
     file.close()
     excel.close()
 
