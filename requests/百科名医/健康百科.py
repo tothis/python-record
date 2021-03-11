@@ -6,11 +6,11 @@ import requests
 import xlsxwriter
 from lxml import html
 
-data_file_path = 'data.txt'
+file_name = '健康百科'
 
 
 def save_excel():
-    excel = xlsxwriter.Workbook('data.xlsx')
+    excel = xlsxwriter.Workbook(file_name + '.xlsx')
     merge_format = excel.add_format({
         'bold': True,  # 字体加粗
         'border': 1,  # 单元格边框宽度
@@ -19,7 +19,7 @@ def save_excel():
         'fg_color': '#f4b084',  # 颜色填充
         'text_wrap': True  # 自动换行
     })
-    file = open(data_file_path, encoding='utf8')
+    file = open(file_name + '.txt', encoding='utf8')
     line = file.readline()
     sheet_dict = {}
     while line:
@@ -109,7 +109,7 @@ if __name__ == '__main__':
                 s_result_item.extend(parse_item(s_titles, 0))
 
                 # 追加写入
-                data_text = open(data_file_path, 'a', encoding='utf8')
+                data_text = open(file_name + '.txt', 'a', encoding='utf8')
                 data_text.write(str(p_result_item) + '\n')
                 data_text.write(str(s_result_item) + '\n')
                 data_text.close()
