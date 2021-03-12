@@ -62,7 +62,7 @@ if __name__ == '__main__':
                 page_html = html.etree.HTML(requests.get(base_url + 'detail/' + str(drug_item['id'])).text)
                 page_name = page_html.xpath('//*[@class="detail_name"]/text()')[0]
                 page_info = page_html.xpath('string(//*[@class="name_info"])')
-                # 删除换行符 合并多个空格 去除首尾空格
+                # 合并多个空格 删除换行符 去除首尾空格
                 page_info = re.sub(' +', ' ', re.sub('\n', ' ', page_info)).strip()
                 row.extend([page_name, page_info])
                 page_data = page_html.xpath('//*[@class="directory_flag"]')

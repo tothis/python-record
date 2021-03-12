@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # coding: utf-8
-import re
 import time
 
 import pymysql
@@ -9,8 +8,11 @@ from lxml import html
 
 
 def is_number(num):
-    match = re.compile(r'^[-+]?[-0-9]\d*\.\d*|[-+]?\.?[0-9]\d*$').match(num)
-    return True if match else False
+    try:
+        float(num)
+        return True
+    except ValueError:
+        return False
 
 
 # 下载文件
@@ -47,7 +49,7 @@ max_count = 712
 
 for i in range(1, max_count + 1):
     new_url = url + str(i)
-    print('url' + new_url)
+    print('url', new_url)
     response = requests.get(new_url).text
     # 解析html文本 获取_Element对象
     html_result = html.etree.HTML(response)
